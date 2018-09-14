@@ -569,6 +569,7 @@ SELECT
     parent_id,
     relative_path_cache,
     title,
+    slug,
     description,
     type,
     view_count,
@@ -617,6 +618,7 @@ SELECT
           'name' => pwg_db_real_escape_string($row['title']),
           'comment' => pwg_db_real_escape_string($row['description']),
           'rank' => $row['weight'],
+          'permalink' => str2url($row['slug']),
           );
 
         $cover_id[$cat_id] = $row['album_cover_item_id'];
@@ -752,7 +754,7 @@ SELECT
       CATEGORIES_TABLE,
       array(
         'primary' => array('id'),
-        'update'  => array('name', 'comment', 'rank'),
+        'update'  => array('name', 'comment', 'rank', 'permalink'),
         ),
       $cat_updates
       );
